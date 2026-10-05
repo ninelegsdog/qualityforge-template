@@ -1,0 +1,12 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "qualityforge": {
+        "type": "local",
+        "command": ["npx", "tsx", "node_modules/qualityforge/src/mcp/index.ts"],
+        "protocol": "auto"
+      }
+    }
+  }
+}

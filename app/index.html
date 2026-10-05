@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QualityForge template</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 3rem auto;
+        max-width: 34rem;
+        line-height: 1.5;
+        color: #14181f;
+      }
+      [role="status"] {
+        border-left: 4px solid #2f7d4f;
+        background: #f2f7f4;
+        padding: 0.6rem 0.9rem;
+      }
+      [role="status"][data-state="error"] {
+        border-left-color: #a5342c;
+        background: #fbf3f2;
+      }
+      button {
+        margin-top: 1rem;
+        padding: 0.5rem 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>QualityForge template</h1>
+    <p>
+      A stub application. Replace it with yours: point
+      <code>config/project.json</code> at your origin and put your tests under
+      <code>tests/</code>.
+    </p>
+
+    <p role="status" id="status">All systems nominal</p>
+    <button type="button" id="report-problem">Report a problem</button>
+
+    <script>
+      document.getElementById("report-problem").addEventListener("click", () => {
+        console.error("billing summary failed to load: 500 from /api/summary");
+        fetch("/api/summary").catch(() => {});
+        const status = document.getElementById("status");
+        status.dataset.state = "error";
+        status.textContent = "Something went wrong";
+      });
+    </script>
+  </body>
+</html>

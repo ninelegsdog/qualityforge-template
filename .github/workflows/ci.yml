@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Tests and gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Install the browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the suite
+        run: npm test
+
+      # Runs after a red suite on purpose. A failing run is exactly when the
+      # artifacts are worth having, and the gate is a separate judgement from
+      # Playwright's: the suite can fail and the gate still pass, or the suite
+      # can pass and the gate still catch a failure rate nobody looked at.
+      - name: Collect artifacts and apply the gate
+        if: ${{ !cancelled() }}
+        run: npm run collect

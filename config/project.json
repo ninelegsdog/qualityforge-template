@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "qualityforge-template",
+  "baseUrl": "http://127.0.0.1:4317",
+  "projects": ["chromium"],
+  "evidence": {
+    "trace": "on-first-retry",
+    "screenshot": "only-on-failure",
+    "video": "retain-on-failure"
+  },
+  "thresholds": {
+    "maxFailureRate": 0.05,
+    "maxAttemptsPerTest": 2,
+    "maxDurationMs": 90000
+  },
+  "defects": {
+    "directory": "artifacts/defects",
+    "writeSummary": true,
+    "referenceErrorContext": true
+  },
+  "history": {
+    "directory": "quality-history",
+    "keep": 200
+  },
+  "tags": ["template"]
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "1.0.0",
+  "specIds": [
+    "homepage-greets-a-visitor-with-a-heading-and-a-status",
+    "homepage-reporting-a-problem-updates-the-status-a-screen-reader-announces"
+  ]
+}

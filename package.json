@@ -1,0 +1,24 @@
+{
+  "name": "qualityforge-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Playwright and QualityForge: green from a fresh clone, with evidence of every failure.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "demo": "playwright test -c playwright.demo.config.ts; tsx node_modules/qualityforge/src/cli/collect-defects.ts --report artifacts/json/playwright-demo-results.json --no-history",
+    "collect": "tsx node_modules/qualityforge/src/cli/collect-defects.ts",
+    "quality": "npm test; t=$?; npm run collect; c=$?; test $t -eq 0 && test $c -eq 0",
+    "serve": "node server.mjs",
+    "mcp": "tsx node_modules/qualityforge/src/mcp/index.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "qualityforge": "git+https://github.com/ninelegsdog/qualityforge.git",
+    "tsx": "^4.23.15"
+  }
+}
