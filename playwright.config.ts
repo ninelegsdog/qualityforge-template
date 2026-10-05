@@ -12,7 +12,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: [
     ["list"],
-    ["json", { outputFile: "artifacts/json/playwright-results.json" }],
+    ["json", { outputFile: "artifacts/json/playwright-results-TYPO.json" }],
   ],
   use: {
     baseURL: "http://127.0.0.1:4317",
