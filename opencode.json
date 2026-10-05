@@ -4,7 +4,7 @@
     "servers": {
       "qualityforge": {
         "type": "local",
-        "command": ["npx", "tsx", "node_modules/qualityforge/src/mcp/index.ts"],
+        "command": ["npx", "--no-install", "qualityforge-mcp"],
         "protocol": "auto"
       }
     }

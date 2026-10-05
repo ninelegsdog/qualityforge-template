@@ -10,15 +10,14 @@
   },
   "scripts": {
     "test": "playwright test",
-    "demo": "playwright test -c playwright.demo.config.ts; tsx node_modules/qualityforge/src/cli/collect-defects.ts --report artifacts/json/playwright-demo-results.json --no-history",
-    "collect": "tsx node_modules/qualityforge/src/cli/collect-defects.ts",
+    "demo": "playwright test -c playwright.demo.config.ts; npx --no-install qualityforge --report artifacts/json/playwright-demo-results.json --no-history",
+    "collect": "npx --no-install qualityforge",
     "quality": "npm test; t=$?; npm run collect; c=$?; test $t -eq 0 && test $c -eq 0",
     "serve": "node server.mjs",
-    "mcp": "tsx node_modules/qualityforge/src/mcp/index.ts"
+    "mcp": "npx --no-install qualityforge-mcp"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
-    "qualityforge": "git+https://github.com/ninelegsdog/qualityforge.git",
-    "tsx": "^4.23.15"
+    "qualityforge": "git+https://github.com/ninelegsdog/qualityforge.git"
   }
 }

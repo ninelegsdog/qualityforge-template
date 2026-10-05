@@ -1,4 +1,4 @@
-import { expect, test } from "qualityforge/dist/fixtures/quality-context.js";
+import { expect, test } from "qualityforge/fixtures/quality-context.js";
 
 /**
  * Deliberately wrong, and outside `testDir`, so `npm test` never runs it.

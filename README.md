@@ -61,12 +61,14 @@ regression" from a guess into an answer.
 2. Put your tests under `tests/` and import them from the fixture:
 
    ```ts
-   import { expect, test } from "qualityforge/dist/fixtures/quality-context.js";
+   import { expect, test } from "qualityforge/fixtures/quality-context.js";
    ```
 
    That one line is what turns on console, page-error and network capture.
    It is a compiled path rather than a source path because Playwright refuses
-   to transpile TypeScript inside `node_modules`.
+   to transpile TypeScript inside `node_modules`, and the package's `exports`
+   map publishes it — `qualityforge/dist/…` is refused on purpose, because
+   internal layout is not the contract.
 
 3. Delete `app/` and `server.mjs`, and either drop the `webServer` block from
    `playwright.config.ts` (if your app is already running) or point it at your
@@ -104,11 +106,15 @@ block is:
     "qualityforge": {
       "enabled": true,
       "type": "local",
-      "command": ["npx", "tsx", "node_modules/qualityforge/src/mcp/index.ts"]
+      "command": ["npx", "--no-install", "qualityforge-mcp"]
     }
   }
 }
 ```
+
+`--no-install` runs the binary out of `node_modules/.bin` and refuses to go to
+the registry when it is not there: a name nobody has published is a name
+somebody else can take.
 
 It refuses to start until there is evidence to read, which is deliberate: run
 the suite and `npm run collect` first. What it then answers:

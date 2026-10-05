@@ -1,4 +1,4 @@
-import { expect, test } from "qualityforge/dist/fixtures/quality-context.js";
+import { expect, test } from "qualityforge/fixtures/quality-context.js";
 
 // That import is the whole integration. Everything else — console errors,
 // uncaught page errors, failed requests — is captured automatically because
