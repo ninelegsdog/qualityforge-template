@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
-    "qualityforge": "git+https://github.com/ninelegsdog/qualityforge.git"
+    "qualityforge": "github:ninelegsdog/qualityforge#v0.1.0-alpha.1"
   }
 }
