@@ -1,5 +1,23 @@
 # qualityforge-template
 
+
+[![CI](https://github.com/ninelegsdog/qualityforge-template/actions/workflows/ci.yml/badge.svg)](https://github.com/ninelegsdog/qualityforge-template/actions/workflows/ci.yml) [![License](https://img.shields.io/github/license/ninelegsdog/qualityforge-template.svg)](LICENSE)
+
+## Contents
+
+- [Quick start](#quick-start)
+- [See what a failure is worth](#see-what-a-failure-is-worth)
+- [Where things live](#where-things-live)
+- [Point it at your application](#point-it-at-your-application)
+- [Commands](#commands)
+- [Letting an agent read the evidence](#letting-an-agent-read-the-evidence)
+- [Requirements](#requirements)
+
+> A **starting point**, not a library. It is a Playwright suite wired to
+> [QualityForge](https://github.com/ninelegsdog/qualityforge) that is green from a
+> fresh clone: evidence of every failure, a quality gate with explicit thresholds,
+> and a read-only MCP surface an agent can read. The suite in this repository
+> tests its own bundled demo app — point it at your application before trusting it.
 Playwright and [QualityForge](https://github.com/ninelegsdog/qualityforge)
 together, green from a fresh clone: your suite runs, and every failure it finds
 becomes a normalized artifact carrying what the page was doing while it failed —
