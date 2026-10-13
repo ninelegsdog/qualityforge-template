@@ -20,6 +20,8 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Repository contract
+        run: python3 scripts/check-repo-contract.py . scripts/repo-contract.json
       - name: Install
         run: npm ci
 
