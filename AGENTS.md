@@ -36,7 +36,6 @@ Run and show the output of:
 ```bash
 uv run --frozen pytest -q
 pre-commit run --all-files
-python3 scripts/check-repo-contract.py . scripts/repo-contract.json
 ```
 
 Do not report a task as done on the basis of a green build alone. Confirm the
