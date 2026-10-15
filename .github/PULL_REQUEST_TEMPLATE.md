@@ -15,7 +15,6 @@ be green about a test that cannot fail.
 
     uv run --frozen pytest -q
     pre-commit run --all-files
-python3 scripts/check-repo-contract.py . scripts/repo-contract.json
 -->
 
 - [ ] Tests pass locally, and the output is above.

@@ -14,9 +14,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Governance layer brought to the family standard: `CONTRIBUTING.md`,
   `SECURITY.md`, `CODE_OF_CONDUCT.md`, `AGENTS.md`, `.editorconfig`,
   `.gitattributes` and `CODEOWNERS`.
-- `scripts/check-repo-contract.py` checks this repository against the shared
-  contract, and `scripts/check-repo-contract_test.py` proves that checker can
-  fail. A gate that has never gone red is an assumption, not a gate.
+
+### Removed
+
+- **The repository contract gate does not travel to the template.**
+  `scripts/check-repo-contract.py`, `scripts/check-repo-contract_test.py`,
+  `scripts/repo-contract.json` and the CI step that ran them are gone, reversing
+  the 2026-10-13 pull requests #5–#7. The gate identifies a repository by
+  **directory name** (`repo = root.name`), and a template is cloned precisely so
+  that the directory is renamed — to the new project's name, which by definition
+  is not in the shared list of sixteen repositories. Measured on a fresh clone:
+  named after the repository the gate reported `contract satisfied (37
+  assertions)`; named anything else — including a new project pushed to its own
+  remote — it failed with exit 1, `repository '<name>' has no type in the
+  contract`. That is the one state in which a template promises to be green.
+  CI never saw it because `actions/checkout` always clones into a directory
+  named after the repository.
+
+  The governance documents stay. They are what a generated project needs
+  whatever its name, and only the checker was the problem. A project gets the
+  gate when it joins the shared contract as an entry of its own.
 
 ### Fixed
 
