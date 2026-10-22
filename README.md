@@ -5,6 +5,20 @@ together, green from a fresh clone: your suite runs, and every failure it finds
 becomes a normalized artifact carrying what the page was doing while it failed —
 console errors, uncaught page errors, failed requests, a screenshot and a video.
 
+[![CI](https://github.com/ninelegsdog/qualityforge-template/actions/workflows/ci.yml/badge.svg)](https://github.com/ninelegsdog/qualityforge-template/actions)
+[![License](https://img.shields.io/github/license/ninelegsdog/qualityforge-template.svg)](LICENSE)
+
+## Contents
+
+- [Quick start](#quick-start)
+- [See what a failure is worth](#see-what-a-failure-is-worth)
+- [Where things live](#where-things-live)
+- [Point it at your application](#point-it-at-your-application)
+- [Commands](#commands)
+- [Letting an agent read the evidence](#letting-an-agent-read-the-evidence)
+- [Contributing](#contributing)
+- [Requirements](#requirements)
+
 ## Quick start
 
 ```bash
@@ -113,19 +127,51 @@ block is:
 ```
 
 `--no-install` runs the binary out of `node_modules/.bin` and refuses to go to
-the registry when it is not there: a name nobody has published is a name
-somebody else can take.
+the registry when it is not there: a tool run must not depend on the network,
+and a dependency that is not installed locally is a failure worth seeing rather
+than something to fetch silently.
 
 It refuses to start until there is evidence to read, which is deliberate: run
 the suite and `npm run collect` first. What it then answers:
 
-| Tool                     | What it answers                                              |
-| ------------------------ | ------------------------------------------------------------ |
-| `quality_get_latest_run` | Pass and fail counts, duration, whether the gate passed      |
-| `quality_list_failures`  | Compact records: id, status, test location, flakiness        |
-| `quality_get_defect`     | One defect in full, including console, network and signals   |
-| `quality_flaky_tests`    | Which specs failed across runs: flaky, failing, new, or gone |
-| `quality_get_trend`      | Pass rate per run, direction, duration, distinct failures    |
+| Tool                         | What it answers                                                          |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| `quality_get_latest_run`     | Pass and fail counts, duration, gate verdict, and every dimension's verdict |
+| `quality_list_failures`      | Compact records: id, status, test location, flakiness                     |
+| `quality_get_defect`         | One defect in full, including console, network and signals                |
+| `quality_flaky_tests`        | Which specs failed across runs: flaky, failing, new, or gone              |
+| `quality_get_trend`          | Pass rate per run, direction, duration, distinct failures                 |
+| `quality_list_audits`        | Accessibility audits on record, newest first, and whether they are clean  |
+| `quality_get_audit`          | One accessibility audit in full, every rule's kept-against-real node count |
+| `quality_list_visual_audits` | Appearance audits per run, with the approving engine                      |
+| `quality_get_visual_audit`   | Every page, its hash, and what was approved against what was seen         |
+| `quality_list_perf_audits`   | Per run: budgets, tests, pages, violations, and whether it passed         |
+| `quality_get_perf_audit`     | One run in full: every declared budget, what each page cost, its violations |
+| `quality_list_api_audits`    | Contract audits, newest first: expectations, tests, violations, passed    |
+| `quality_get_api_audit`      | One contract run in full, and every violation in it                       |
+
+The last eight read the four audit evidence directories — `artifacts/audit`,
+`artifacts/api`, `artifacts/perf` and `artifacts/visual` — or the roots you pass
+with `--audit-root`, `--api-root`, `--perf-root` and `--visual-root`. This
+template's suite produces defect evidence under `artifacts/defects`; the audit
+directories stay empty until you run those audits yourself.
+
+## Contributing
+
+This repository carries its own copy of the family repository contract, and CI
+runs it before anything is installed:
+
+```bash
+python3 scripts/check-repo-contract.py . scripts/repo-contract.json
+python3 scripts/check-links.py .
+```
+
+The contract is keyed by the checkout directory name, which a clone gives as
+`qualityforge-template`. Contribution rules are in
+[CONTRIBUTING.md](CONTRIBUTING.md), rules for coding agents in
+[AGENTS.md](AGENTS.md), and the release history in [CHANGELOG.md](CHANGELOG.md).
+Security problems never go to a public issue: [SECURITY.md](SECURITY.md) has the
+private path. Conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Requirements
 

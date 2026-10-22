@@ -1,0 +1,41 @@
+name: Feature request
+description: A suggested change to this template. Be ready to name the problem it solves and how you would prove it works.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository is a template over a pinned qualityforge release, so its
+        roadmap is deliberately short: it mirrors what the package does and adds
+        nothing of its own. A request that names the problem, the proposed
+        change, and the evidence that "done" means is one that can be weighed.
+        See the qualityforge roadmap for what is explicitly out of scope:
+        https://github.com/ninelegsdog/qualityforge/blob/main/docs/roadmap.md
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What is missing or broken, and for whom? A concrete scenario beats a general wish.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The proposed change
+      description: What would you add or change? Keep it to a scope that can be reviewed.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How "done" would be verified
+      description: What would have to be observed for the change to count as working? A green build alone is not evidence — name the failure you would break on purpose.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: "I have read the qualityforge roadmap and this does not repeat an explicitly out-of-scope item"
+          required: true

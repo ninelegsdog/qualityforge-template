@@ -12,6 +12,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The family repository contract: required artefacts, README front-page
+      # rules, relative links. Python 3, standard library only, so it runs
+      # before anything is installed — a gate that needed the project's own
+      # dependencies could not guard the install itself. The directory name is
+      # what selects the repository's contract type, and a checkout here is
+      # named for the repository.
+      - name: Repository contract
+        run: python3 scripts/check-repo-contract.py . scripts/repo-contract.json
+
+      # The contract check has to be able to fail, and this proves it can: the
+      # same rules, broken one at a time against a synthetic repository, with
+      # the validator expected to name the right rule every time.
+      - name: Contract check negative tests
+        run: python3 scripts/check-repo-contract_test.py
+
+      # GitHub renders a missing link target as plain text instead of failing,
+      # so a broken relative link is invisible in review.
+      - name: Check documentation links
+        run: python3 scripts/check-links.py .
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
