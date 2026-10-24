@@ -149,3 +149,26 @@ the suite and `npm run collect` first. What it then answers:
 
 Node.js 22 or newer. Linux is what CI runs and therefore what is verified;
 macOS and Windows should work and have not been tested.
+
+## Quick demo
+
+После клонирования и установки зависимостей тесты запускаются с quality-gate из коробки:
+
+```bash
+npm i
+npx playwright test
+```
+
+При падении в `playwright-report/` и `test-results/` автоматически собираются артефакты. Quality gate блокирует мердж при наличии регрессий.
+
+## Структура артефактов
+
+```
+test-results/
+├── <test-name>/        # скриншоты, trace, видео при падении
+playwright-report/      # HTML-отчёт
+```
+
+## Quality gate
+
+Шаблон настроен так, чтобы **не пропускать** необоснованные фейлы. Цель — не «100% зелёных тестов любой ценой», а **evidence-first** подход: каждое падение должно быть обосновано артефактами.
